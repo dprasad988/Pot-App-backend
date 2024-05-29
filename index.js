@@ -1,19 +1,14 @@
 const express = require('express');
+const connectDB = require('./config/db.js')
 
 require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT || 3000;
+connectDB();
 app.use(express.json());
 
-
-connectDB();
-// Example route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-// Import routes
-const apiRoutes = require('./routes/api');
+const apiRoutes = require('./routes/users.js');
 app.use('/api', apiRoutes);
 
 app.listen(port, () => {
